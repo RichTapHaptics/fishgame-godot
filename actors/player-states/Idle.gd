@@ -11,6 +11,10 @@ func _state_enter(info: Dictionary) -> void:
 func _get_player_input_vector() -> Vector2:
 	return Vector2(host.input_buffer.get_action_strength("right") - host.input_buffer.get_action_strength("left"), 0)
 
+func _get_player_input_vector2() -> String:
+	return host.input_buffer.action_prefix
+
+
 func _check_pickup_or_throw_or_use():
 	# Only do this on the client controlling this player, because we have 
 	# seperate system for sync'ing pickups and throws that this will conflict
@@ -21,10 +25,22 @@ func _check_pickup_or_throw_or_use():
 	# We use call_deferred() here so that those operation happen after we've
 	# moved the player, so we aren't, for example, shooting from our old position
 	# rather than our new position.
+	#print(host.input_buffer.action_prefix )
+	
 	if host.input_buffer.is_action_just_pressed("grab"):
 		host.call_deferred("pickup_or_throw")
+		#if Input.get_connected_joypads().size() > 0:
+		#var joystick = Input.get_connected_joypads()[0]
+		# Input.start_joy_vibration(0, 0.4,0.8,0.1)
 	elif host.input_buffer.is_action_just_pressed("use"):
 		host.call_deferred("try_use")
+		#if Input.get_connected_joypads().size() > 0:
+		#var joystick = Input.get_connected_joypads()[0]
+			#print("日志：" + (host.input_buffer.action_prefix) )
+			#var prefix = host.input_buffer.action_prefix
+			#print("日志：%d" %(prefix.find("1")) )
+			#if(prefix.find("player1") != -1):
+		#Input.start_joy_vibration(0, 0.9,0.1,0.1)
 
 func _decelerate_to_zero(delta: float) -> void:
 	if host.vector.x < 0:

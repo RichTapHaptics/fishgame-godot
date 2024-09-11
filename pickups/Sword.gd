@@ -2,6 +2,7 @@ extends Pickup
 
 onready var animation_player = $AnimationPlayer
 onready var sounds = $Sounds
+onready var haptic := $Haptic
 
 func use() -> void:
 	if animation_player.is_playing():
@@ -19,3 +20,4 @@ func _on_throw() -> void:
 remotesync func _do_use() -> void:
 	animation_player.play("Swing")
 	sounds.play("Swing")
+	haptic.playPickup("Swing")

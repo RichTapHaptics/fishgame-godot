@@ -1,0 +1,80 @@
+{
+	"Metadata": {
+		"Created": "2024-09-02",
+		"Description": "Exported from RichTap Creator Pro",
+		"Version": 2
+	},
+	"PatternList": [
+		{
+			"AbsoluteTime": 0,
+			"Pattern": [
+				{
+					"Event": {
+						"Type": "transient",
+						"RelativeTime": 0,
+						"Parameters": {
+							"Intensity": 77,
+							"Frequency": 36
+						},
+						"Index": 0
+					}
+				},
+				{
+					"Event": {
+						"Type": "transient",
+						"RelativeTime": 57,
+						"Parameters": {
+							"Intensity": 62,
+							"Frequency": 36
+						},
+						"Index": 0
+					}
+				},
+				{
+					"Event": {
+						"Type": "transient",
+						"RelativeTime": 114,
+						"Parameters": {
+							"Intensity": 45,
+							"Frequency": 36
+						},
+						"Index": 0
+					}
+				},
+				{
+					"Event": {
+						"Type": "transient",
+						"RelativeTime": 171,
+						"Parameters": {
+							"Intensity": 53,
+							"Frequency": 36
+						},
+						"Index": 0
+					}
+				},
+				{
+					"Event": {
+						"Type": "transient",
+						"RelativeTime": 228,
+						"Parameters": {
+							"Intensity": 65,
+							"Frequency": 36
+						},
+						"Index": 0
+					}
+				},
+				{
+					"Event": {
+						"Type": "transient",
+						"RelativeTime": 285,
+						"Parameters": {
+							"Intensity": 34,
+							"Frequency": 36
+						},
+						"Index": 0
+					}
+				}
+			]
+		}
+	]
+}

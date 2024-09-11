@@ -1,0 +1,18 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
+
+[entry]
+
+X11.64="res://addons/richtap_haptic/bin/x11/richtap_gd_sdk.so"
+Windows.64="res://addons/richtap_haptic/bin/win64/richtap_gd_sdk.dll"
+OSX.64="res://addons/richtap_haptic/bin/osx/richtap_gd_sdk.dylib"
+
+[dependencies]
+
+X11.64=[  ]
+Windows.64=[  ]
+OSX.64=[  ]

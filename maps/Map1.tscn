@@ -57,6 +57,10 @@ pickup_scene = ExtResource( 3 )
 position = Vector2( 300, -690 )
 pickup_scene = ExtResource( 3 )
 
+[node name="TimedGenerator8" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 589, -175 )
+pickup_scene = ExtResource( 3 )
+
 [node name="Seaweed1" parent="Objects" instance=ExtResource( 4 )]
 position = Vector2( 615, -180 )
 

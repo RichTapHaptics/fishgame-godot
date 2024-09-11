@@ -20,6 +20,7 @@ func _do_generate() -> void:
 		return
 
 	var pickup_name = Util.find_unique_name(pickup_parent, 'Pickup-')
+	print("拾取名称：",pickup_name)
 	if GameState.online_play:
 		rpc("generate", pickup_name)
 	else:

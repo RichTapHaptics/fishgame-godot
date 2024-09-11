@@ -15,6 +15,7 @@ func _state_physics_process(delta: float) -> void:
 		if abs(input_vector.x) > 0:
 			get_parent().change_state("Move", { input_vector = input_vector })
 		else:
+			host.haptic.play("Fall_Floor")
 			get_parent().change_state("Idle", { landing = true })
 		return
 	

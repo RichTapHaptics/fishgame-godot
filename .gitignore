@@ -5,3 +5,5 @@
 /webrtc_debug/
 /webrtc/
 /nakama/data/
+RICHTAP_LOG.log
+/.mono/

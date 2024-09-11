@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "TextFile",
+"class": "HeResource",
+"language": "GDScript",
+"path": "res://addons/richtap_haptic/HeResource.gd"
+}, {
+"base": "EditorImportPlugin",
+"class": "HeZEditorImportPlugin",
+"language": "GDScript",
+"path": "res://addons/richtap_haptic/HeZEditorImportPlugin.gd"
+}, {
 "base": "Reference",
 "class": "NakamaAPI",
 "language": "GDScript",
@@ -95,6 +105,8 @@ _global_script_classes=[ {
 "path": "res://main/UILayer.gd"
 } ]
 _global_script_class_icons={
+"HeResource": "",
+"HeZEditorImportPlugin": "",
 "NakamaAPI": "",
 "NakamaAsyncResult": "",
 "NakamaClient": "",
@@ -128,6 +140,7 @@ Online="*res://autoload/Online.gd"
 OnlineMatch="*res://autoload/OnlineMatch.gd"
 GameState="*res://autoload/GameState.gd"
 Util="*res://autoload/Util.gd"
+RichtapSdk="*res://addons/richtap_haptic/RichtapSdk.gd"
 
 [display]
 
@@ -138,13 +151,25 @@ window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
 
+[editor]
+
+search_in_file_extensions=PoolStringArray( "gd", "gdshader", "he" )
+
 [editor_plugins]
 
-enabled=PoolStringArray( "snopek-state-machine" )
+enabled=PoolStringArray( "res://addons/richtap_haptic/plugin.cfg" )
+
+[export]
+
+export_pre_script="res://export_pre_script.gd"
 
 [gdnative]
 
-singletons=[  ]
+singletons=false
+
+[global]
+
+resource=false
 
 [importer_defaults]
 
@@ -167,6 +192,9 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+He={
+"use_red_anyway": false
 }
 
 [input]
@@ -338,6 +366,11 @@ player4_blop={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
+
 [layer_names]
 
 2d_physics/layer_1="Environment"
@@ -345,6 +378,10 @@ player4_blop={
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Pickup"
 2d_physics/layer_5="OneWayPlatforms"
+
+[mono]
+
+project/assembly_name="Fish Game"
 
 [physics]
 

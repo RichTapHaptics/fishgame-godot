@@ -15,6 +15,7 @@ onready var dud_detector := $DudDetector
 onready var animation_player := $AnimationPlayer
 onready var cooldown_timer := $CooldownTimer
 onready var sounds := $Sounds
+onready var haptic := $Haptic
 
 var allow_shoot := true
 onready var ammo := max_ammo
@@ -42,7 +43,6 @@ func use() -> void:
 remotesync func _start_use() -> void:
 	# Account for a player throwing the gun before it actually fires.
 	use_by_player = player
-
 	animation_player.play("Shoot")
 
 func _fire_projectile() -> void:
@@ -65,6 +65,7 @@ remotesync func _do_fire_projectile(_projectile_name: String, _projectile_positi
 		var sparks = SparksEffect.instance()
 		sparks_position.add_child(sparks)
 		sounds.play("Empty")
+		haptic.playPickup("Empty")
 	else:
 		ammo -= 1
 
@@ -74,6 +75,7 @@ remotesync func _do_fire_projectile(_projectile_name: String, _projectile_positi
 
 		projectile.shoot(_projectile_position, _projectile_vector, _projectile_range, _projectile_dud)
 		sounds.play("Shoot")
+		haptic.playPickup("Shoot")
 
 func _on_throw_finished() -> void:
 	if ammo <= 0:

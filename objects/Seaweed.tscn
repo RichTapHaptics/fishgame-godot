@@ -25,8 +25,9 @@ tracks/0/keys = {
 position = Vector2( -24, -51 )
 texture = ExtResource( 1 )
 centered = false
-vframes = 2
 hframes = 5
+vframes = 2
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

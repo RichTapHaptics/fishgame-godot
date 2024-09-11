@@ -10,7 +10,7 @@ func _state_exit() -> void:
 	host.show_sliding = false
 	host.sliding_collision_shape.set_deferred('disabled', true)
 	host.standing_collision_shape.set_deferred('disabled', false)
-
+	
 func _state_physics_process(delta: float) -> void:
 	_check_pickup_or_throw_or_use()
 	

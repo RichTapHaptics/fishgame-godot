@@ -4,7 +4,13 @@ func _state_enter(info: Dictionary) -> void:
 	host.play_animation("Walk")
 	if info.has('input_vector'):
 		do_move(info['input_vector'])
-
+		#if Input.get_connected_joypads().size() > 0:
+			#if (host.flip_h != true):
+				#host.haptic.play("Move")
+				#Input.start_joy_vibration(0, 0.9,0,1)
+			#else:
+				#host.haptic.play("Move_Left")
+				#Input.start_joy_vibration(0, 0,0.9,1)
 
 func _state_physics_process(delta: float) -> void:
 	_check_pickup_or_throw_or_use()
@@ -40,7 +46,6 @@ func do_flip_sprite(input_vector: Vector2) -> void:
 
 func do_move(input_vector: Vector2) -> void:
 	do_flip_sprite(input_vector)
-	
 	# Accelerate to top speed.
 	var delta = get_physics_process_delta_time()
 	if input_vector.x > 0:

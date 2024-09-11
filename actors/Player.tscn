@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/sprites/whale_orange.png" type="Texture" id=1]
 [ext_resource path="res://actors/player-states/Hurt.gd" type="Script" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://components/Sounds.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/pickup.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/throw.wav" type="AudioStream" id=8]
-[ext_resource path="res://actors/Player.gd" type="Script" id=9]
+[ext_resource path="res://addons/richtap_haptic/RichtapPlayer.gd" type="Script" id=9]
 [ext_resource path="res://assets/sounds/hurt.wav" type="AudioStream" id=10]
 [ext_resource path="res://actors/player-states/Move.gd" type="Script" id=11]
 [ext_resource path="res://addons/snopek-state-machine/StateMachine.gd" type="Script" id=12]
@@ -22,6 +22,13 @@
 [ext_resource path="res://assets/sounds/blops/blop1.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/sounds/blops/blop2.wav" type="AudioStream" id=21]
 [ext_resource path="res://actors/player-states/Fall.gd" type="Script" id=22]
+[ext_resource path="res://assets/haptics/jump.he" type="TextFile" id=23]
+[ext_resource path="res://actors/Player.gd" type="Script" id=24]
+[ext_resource path="res://assets/haptics/fall_floor.he" type="TextFile" id=25]
+[ext_resource path="res://actors/haptic.gd" type="Script" id=26]
+[ext_resource path="res://assets/haptics/pickup.he" type="TextFile" id=29]
+[ext_resource path="res://assets/haptics/throw.he" type="TextFile" id=30]
+[ext_resource path="res://assets/haptics/explode.he" type="TextFile" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 28 )
@@ -250,8 +257,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=17]
-length = 0.6
-loop = true
+length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodySprite:frame")
 tracks/0/interp = 1
@@ -422,7 +428,7 @@ tracks/3/keys = {
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 17
-script = ExtResource( 9 )
+script = ExtResource( 24 )
 
 [node name="BackPickupPosition" type="Position2D" parent="."]
 position = Vector2( 14, -20 )
@@ -431,15 +437,15 @@ position = Vector2( 14, -20 )
 position = Vector2( 65, -47 )
 texture = ExtResource( 1 )
 offset = Vector2( -65, 16 )
-vframes = 22
 hframes = 7
-frame = 1
+vframes = 22
+frame = 19
 
 [node name="FinSprite" type="Sprite" parent="."]
 position = Vector2( 0, -31 )
 texture = ExtResource( 1 )
-vframes = 22
 hframes = 7
+vframes = 22
 frame = 7
 
 [node name="FrontPickupPosition" type="Position2D" parent="."]
@@ -461,9 +467,9 @@ disabled = true
 
 [node name="PickupArea" type="Area2D" parent="."]
 position = Vector2( 2, 0 )
-monitorable = false
 collision_layer = 0
 collision_mask = 8
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 modulate = Color( 0.827451, 0, 1, 1 )
@@ -553,7 +559,8 @@ script = ExtResource( 6 )
 
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 5 )
-volume_db = -5.0
+volume_db = 1.23
+pitch_scale = 1.26
 bus = "Sound Effects"
 
 [node name="Pickup" type="AudioStreamPlayer" parent="Sounds"]
@@ -595,6 +602,31 @@ bus = "Sound Effects"
 [node name="Blop3" type="AudioStreamPlayer" parent="Sounds/Blop"]
 stream = ExtResource( 19 )
 bus = "Sound Effects"
+
+[node name="Haptic" type="Node" parent="."]
+script = ExtResource( 26 )
+
+[node name="Jump" type="Node" parent="Haptic"]
+script = ExtResource( 9 )
+source_clip = ExtResource( 23 )
+
+[node name="Pickup" type="Node" parent="Haptic"]
+script = ExtResource( 9 )
+source_clip = ExtResource( 29 )
+
+[node name="Throw" type="Node" parent="Haptic"]
+script = ExtResource( 9 )
+source_clip = ExtResource( 30 )
+
+[node name="Hurt" type="Node" parent="Haptic"]
+script = ExtResource( 9 )
+source_clip = ExtResource( 31 )
+Amplitude = 255
+
+[node name="Fall_Floor" type="Node" parent="Haptic"]
+script = ExtResource( 9 )
+source_clip = ExtResource( 25 )
+
 [connection signal="frame_changed" from="BodySprite" to="." method="_on_BodySprite_frame_changed"]
 [connection signal="body_exited" from="PassThroughDetectorArea" to="." method="_on_PassThroughDetectorArea_body_exited"]
 [connection signal="state_changed" from="StateMachine" to="." method="_on_StateMachine_state_changed"]

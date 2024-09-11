@@ -48,6 +48,7 @@ onready var state_machine := $StateMachine
 onready var sprite_animation_player: AnimationPlayer = $SpriteAnimationPlayer
 onready var pickup_animation_player: AnimationPlayer = $PickupAnimationPlayer
 onready var sounds := $Sounds
+onready var haptic := $Haptic
 
 onready var standing_collision_shape := $StandingCollisionShape
 onready var ducking_collision_shape := $DuckingCollisionShape
@@ -58,7 +59,6 @@ onready var gravity: float = float(ProjectSettings.get_setting("physics/2d/defau
 var flip_h := false setget set_flip_h
 var show_gliding := false setget set_show_gliding
 var show_sliding := false setget set_show_sliding
-
 const ONE_WAY_PLATFORMS_COLLISION_BIT := 4
 var pass_through_one_way_platforms := false setget set_pass_through_one_way_platforms
 
@@ -82,6 +82,9 @@ func _ready():
 	body_sprite.texture = skin_resources[player_skin]
 	fin_sprite.texture = skin_resources[player_skin]
 	reset_state()
+	#if Input.get_connected_joypads().size() > 0:
+		#var joystick = Input.get_connected_joypads()[0]
+		 #Input.start_joy_vibration(0, 0.1,0.1,40000)
 
 func set_player_skin(_player_skin: int) -> void:
 	if player_skin != _player_skin and _player_skin < PlayerSkin.MAX and _player_skin >= 0:
@@ -112,6 +115,7 @@ func set_pass_through_one_way_platforms(_pass_through: bool) -> void:
 func _on_PassThroughDetectorArea_body_exited(body: Node) -> void:
 	self.pass_through_one_way_platforms = false
 
+	
 func set_show_gliding(_show_gliding: bool) -> void:
 	if show_gliding != _show_gliding:
 		show_gliding = _show_gliding
@@ -180,6 +184,7 @@ remotesync func _try_pickup() -> void:
 
 remotesync func _do_pickup(pickup_path: NodePath) -> void:
 	sounds.play("Pickup")
+	haptic.play("Pickup")
 	current_pickup = get_node(pickup_path)
 	current_pickup.pickup(self)
 	current_pickup.get_parent().remove_child(current_pickup)
@@ -191,8 +196,9 @@ remotesync func _do_pickup(pickup_path: NodePath) -> void:
 remotesync func _do_throw() -> void:
 	if current_pickup == null:
 		return
-
+	
 	sounds.play("Throw")
+	haptic.play("Throw")
 	var throw_vector = (vector * throw_vector_mix) + ((Vector2.LEFT if flip_h else Vector2.RIGHT) * throw_velocity)
 	throw_vector += Vector2.UP * throw_upward_velocity
 
@@ -239,6 +245,10 @@ func die() -> void:
 
 remotesync func _do_die() -> void:
 	var explosion = ExplodeEffect.instance()
+	var index = 0
+	if (input_buffer.action_prefix.begins_with("player2")):
+		 index = 1
+	explosion.index = index
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
 
