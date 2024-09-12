@@ -8,7 +8,7 @@
 [ext_resource path="res://components/Sounds.gd" type="Script" id=6]
 [ext_resource path="res://assets/haptics/sword.he" type="TextFile" id=7]
 [ext_resource path="res://addons/richtap_haptic/RichtapPlayer.gd" type="Script" id=8]
-[ext_resource path="res://actors/haptic.gd" type="Script" id=9]
+[ext_resource path="res://components/Haptic.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.9448, 32.6482 )

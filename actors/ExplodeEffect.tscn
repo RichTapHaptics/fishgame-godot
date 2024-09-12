@@ -62,5 +62,6 @@ bus = "Sound Effects"
 [node name="Haptic" type="Node" parent="."]
 script = ExtResource( 9 )
 source_clip = ExtResource( 8 )
+Amplitude = 254
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

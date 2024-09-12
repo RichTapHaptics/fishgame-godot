@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/haptics/gun.he" type="TextFile" id=7]
 [ext_resource path="res://addons/richtap_haptic/RichtapPlayer.gd" type="Script" id=8]
 [ext_resource path="res://pickups/Projectile.tscn" type="PackedScene" id=9]
-[ext_resource path="res://actors/haptic.gd" type="Script" id=10]
+[ext_resource path="res://components/Haptic.gd" type="Script" id=10]
 [ext_resource path="res://assets/haptics/empty.he" type="TextFile" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]

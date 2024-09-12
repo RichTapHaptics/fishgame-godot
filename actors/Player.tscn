@@ -25,7 +25,7 @@
 [ext_resource path="res://assets/haptics/jump.he" type="TextFile" id=23]
 [ext_resource path="res://actors/Player.gd" type="Script" id=24]
 [ext_resource path="res://assets/haptics/fall_floor.he" type="TextFile" id=25]
-[ext_resource path="res://actors/haptic.gd" type="Script" id=26]
+[ext_resource path="res://components/Haptic.gd" type="Script" id=26]
 [ext_resource path="res://assets/haptics/pickup.he" type="TextFile" id=29]
 [ext_resource path="res://assets/haptics/throw.he" type="TextFile" id=30]
 [ext_resource path="res://assets/haptics/explode.he" type="TextFile" id=31]
@@ -609,6 +609,7 @@ script = ExtResource( 26 )
 [node name="Jump" type="Node" parent="Haptic"]
 script = ExtResource( 9 )
 source_clip = ExtResource( 23 )
+Playing = true
 
 [node name="Pickup" type="Node" parent="Haptic"]
 script = ExtResource( 9 )
@@ -621,7 +622,6 @@ source_clip = ExtResource( 30 )
 [node name="Hurt" type="Node" parent="Haptic"]
 script = ExtResource( 9 )
 source_clip = ExtResource( 31 )
-Amplitude = 255
 
 [node name="Fall_Floor" type="Node" parent="Haptic"]
 script = ExtResource( 9 )
