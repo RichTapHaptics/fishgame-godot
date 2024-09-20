@@ -609,7 +609,6 @@ script = ExtResource( 26 )
 [node name="Jump" type="Node" parent="Haptic"]
 script = ExtResource( 9 )
 source_clip = ExtResource( 23 )
-Playing = true
 
 [node name="Pickup" type="Node" parent="Haptic"]
 script = ExtResource( 9 )

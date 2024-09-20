@@ -8,7 +8,7 @@ func _ready():
 	emitting = true
 	sounds.play("Explode")
 	if Input.get_connected_joypads().size() > 0 :
-		haptic.playHaptic(1,index)
+		haptic.playHaptic(index)
 
 func _on_Timer_timeout() -> void:
 	queue_free()

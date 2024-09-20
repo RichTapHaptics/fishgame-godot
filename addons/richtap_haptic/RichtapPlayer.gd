@@ -2,14 +2,14 @@ tool
 extends Node
 
 export(TextFile) var source_clip = null setget set_source_clip
-export(bool) var Playing = false setget set_playing
-export(int, -1, 100) var Loop = 0
-export(int, 0, 511) var Amplitude = 255
-export(int, -100, 100) var Frequency = 0
+export(bool) var playing = false setget set_playing
+export(int, -1, 100) var loop = 0
+export(int, 0, 511) var amplitude = 255
+export(int, -100, 100) var frequency = 0
 #export(bool) var mute = false setget set_mute
 var testContent:String = ""
 
-func playHaptic(count= 1,index = 0):
+func playHaptic(index = 0):
 	print("RichtapPlayer playHaptic")
 	if(source_clip != null) :
 		var target_indices:Array
@@ -21,8 +21,8 @@ func playHaptic(count= 1,index = 0):
 			# 处理其他类型的情况或输出错误信息
 			print("Invalid index type. Expected int or Array.")
 			return
-		RichtapSdk.setTargetControllers(count,target_indices)
-		RichtapSdk.playHaptic(testContent,Loop,Amplitude,Frequency)
+		RichtapSdk.setTargetControllers(target_indices.size(),target_indices)
+		RichtapSdk.playHaptic(testContent,loop,amplitude,frequency)
 
 func set_source_clip(value) :
 	if(value != null) :
@@ -36,23 +36,23 @@ func stopHaptic():
 func getSdkVersion():
 	return RichtapSdk.getVersionName()
 
-func sendLoopParamters( intensity:int = 0, frequency:int = 0, interval:int = 0):
-		RichtapSdk.sendLoopParameters(intensity,frequency,interval)
+func sendLoopParameters( intensity:int = 0, freq:int = 0, interval:int = 0):
+	RichtapSdk.sendLoopParameters(intensity,freq,interval)
 
 func set_playing(value: bool) -> void:
-	if Playing != value:
+	if playing != value:
 		if value :
 			playHaptic()
 		else :
 			stopHaptic()
-		Playing = value
+		playing = value
 
 #func set_mute(value: bool) -> void:
 #	if mute != value:
 #		if (value) :
-#			sendLoopParamters(0,0,0)
+#			sendLoopParameters(0,0,0)
 #		else :
-#			sendLoopParamters(Amplitude,Frequency,0)
+#			sendLoopParameters(Amplitude,Frequency,0)
 #		mute = value
 
 func openLog(enable:bool) :

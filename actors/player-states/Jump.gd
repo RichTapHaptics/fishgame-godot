@@ -3,8 +3,8 @@ extends "res://actors/player-states/Move.gd"
 func _state_enter(info: Dictionary) -> void:
 	host.play_animation("Jump")
 	host.sounds.play("Jump")
+	#host.haptic.play("Jump")
 	host.vector.y = -host.jump_speed
-	host.haptic.play("Jump")
 		
 	if info.has('input_vector'):
 		do_move(info['input_vector'])

@@ -10,8 +10,7 @@ func play(name: String):
 		var index = 0
 		if (prefix.begins_with("player2")):
 			index = 1
-		node.playHaptic(1,index)
-
+		node.playHaptic(index)
 
 func playPickup(name: String):
 	if Input.get_connected_joypads().size() > 0 :
@@ -22,5 +21,5 @@ func playPickup(name: String):
 		var index = 0
 		if (prefix.begins_with("player2")):
 			 index = 1
-		node.playHaptic(1,index)
+		node.playHaptic(index)
 		

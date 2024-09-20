@@ -6,7 +6,7 @@ func _enter_tree():
 	add_autoload_singleton("RichtapSdk","res://addons/richtap_haptic/RichtapSdk.gd")
 	add_custom_type("RichtapPlayer","Node",
 		load("res://addons/richtap_haptic/RichtapPlayer.gd"),null)
-	inport_plugin = preload("res://addons/richtap_haptic/HeZEditorImportPlugin.gd").new()
+	inport_plugin = preload("res://addons/richtap_haptic/HeEditorImportPlugin.gd").new()
 	add_import_plugin(inport_plugin)
 
 
