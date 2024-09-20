@@ -7,12 +7,12 @@ export(int, -1, 100) var loop = 0
 export(int, 0, 511) var amplitude = 255
 export(int, -100, 100) var frequency = 0
 #export(bool) var mute = false setget set_mute
-var testContent:String = ""
+var testContent: String = ""
 
 func playHaptic(index = 0):
 	print("RichtapPlayer playHaptic")
-	if(source_clip != null) :
-		var target_indices:Array
+	if (source_clip != null):
+		var target_indices: Array
 		if index is Array:
 			target_indices = index
 		elif index is int:
@@ -21,12 +21,12 @@ func playHaptic(index = 0):
 			# 处理其他类型的情况或输出错误信息
 			print("Invalid index type. Expected int or Array.")
 			return
-		RichtapSdk.setTargetControllers(target_indices.size(),target_indices)
-		RichtapSdk.playHaptic(testContent,loop,amplitude,frequency)
+		RichtapSdk.setTargetControllers(target_indices.size(), target_indices)
+		RichtapSdk.playHaptic(testContent, loop, amplitude, frequency)
 
-func set_source_clip(value) :
-	if(value != null) :
-		print("HeResource set_source_clip",value.resource_path)
+func set_source_clip(value):
+	if (value != null):
+		print("HeResource set_source_clip", value.resource_path)
 		testContent = getFileContent(value.resource_path)
 	source_clip = value
 
@@ -36,26 +36,26 @@ func stopHaptic():
 func getSdkVersion():
 	return RichtapSdk.getVersionName()
 
-func sendLoopParameters( intensity:int = 0, freq:int = 0, interval:int = 0):
-	RichtapSdk.sendLoopParameters(intensity,freq,interval)
+func sendLoopParameters(intensity: int = 0, freq: int = 0, interval: int = 0):
+	RichtapSdk.sendLoopParameters(intensity, freq, interval)
 
 func set_playing(value: bool) -> void:
 	if playing != value:
-		if value :
+		if value:
 			playHaptic()
-		else :
+		else:
 			stopHaptic()
 		playing = value
 
 #func set_mute(value: bool) -> void:
 #	if mute != value:
 #		if (value) :
-#			sendLoopParameters(0,0,0)
+#			sendLoopParameters(0, 0, 0)
 #		else :
-#			sendLoopParameters(Amplitude,Frequency,0)
+#			sendLoopParameters(amplitude, frequency, 0)
 #		mute = value
 
-func openLog(enable:bool) :
+func openLog(enable: bool):
 	RichtapSdk.openLog(enable)
 	
 func _enter_tree():
@@ -71,9 +71,9 @@ func getFileContent(resource_path) -> String:
 		#print(resource.getHeContent())
 		return resource.getHeContent()
 	else:
-		return ""	
+		return ""
 
-func read_file_content(file_path:String)->String:
+func read_file_content(file_path: String) -> String:
 	var file = File.new()
 	var error = file.open(file_path, File.READ)
 	if error != OK:
@@ -86,7 +86,7 @@ func read_file_content(file_path:String)->String:
 	#print("he读取内容:成功 +===" + heContent)
 	var lines = heContent.split('\n')
 	for line in lines:
-		line = line.strip_edges()  # 去除行首尾空白字符
+		line = line.strip_edges() # 去除行首尾空白字符
 		if line.begins_with("path="):
-			return line.substr(6,line.length() -7)  # 提取 path 后面的内容
+			return line.substr(6, line.length() - 7) # 提取 path 后面的内容
 	return ""

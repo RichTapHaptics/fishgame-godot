@@ -1,8 +1,8 @@
 tool
 extends EditorImportPlugin
 
-class_name  HeEditorImportPlugin
-enum Presets { DEFAULT }
+class_name HeEditorImportPlugin
+enum Presets {DEFAULT}
 const RESOURCE_TYPE = "TextFile"
 
 
@@ -19,10 +19,10 @@ func get_resource_type():
 	print("EditorImportPlugin get_resource_type")
 	return RESOURCE_TYPE
 func get_import_options(preset):
-	print("EditorImportPlugin load preset_index：",preset)
+	print("EditorImportPlugin load preset_index：", preset)
 	match preset:
 		Presets.DEFAULT:
-			return [{
+			return [ {
 					   "name": "use_red_anyway",
 					   "default_value": false
 					}]
@@ -49,13 +49,12 @@ func get_import_order():
 	return 0
 	
 func import(source_file, save_path, options, platform_variants, gen_files):
-	print("EditorImportPlugin import save_path："+ save_path +"，source_file:" , source_file)
+	print("EditorImportPlugin import save_path：" + save_path + "，source_file:", source_file)
 	var resource = HeResource.new()
-	print("EditorImportPlugin resource" ,resource)
-	var saveName = "%s.%s" % [save_path,get_save_extension()]
-	resource.load_forn_file(source_file,saveName)
-	var e  = ResourceSaver.save(saveName,resource,ResourceSaver.FLAG_CHANGE_PATH)
+	print("EditorImportPlugin resource", resource)
+	var saveName = "%s.%s" % [save_path, get_save_extension()]
+	resource.load_forn_file(source_file, saveName)
+	var e = ResourceSaver.save(saveName, resource, ResourceSaver.FLAG_CHANGE_PATH)
 	gen_files.push_back(saveName)
-	print("EditorImportPlugin save result：",e,saveName)
+	print("EditorImportPlugin save result：", e, saveName)
 	return e
-	
