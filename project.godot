@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/richtap_haptic/HeResource.gd"
 }, {
-"base": "EditorImportPlugin",
-"class": "HeZEditorImportPlugin",
-"language": "GDScript",
-"path": "res://addons/richtap_haptic/HeZEditorImportPlugin.gd"
-}, {
 "base": "Reference",
 "class": "NakamaAPI",
 "language": "GDScript",
@@ -112,7 +107,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "HeEditorImportPlugin": "",
 "HeResource": "",
-"HeZEditorImportPlugin": "",
 "NakamaAPI": "",
 "NakamaAsyncResult": "",
 "NakamaClient": "",
